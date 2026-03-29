@@ -1,0 +1,18 @@
+class Solution:
+    def maxArea(self, heights: List[int]) -> int:
+        i=0
+        j=len(heights)-1
+        memo={}
+        def d(a,b):
+            if a==b or a<0:
+                return 0
+            if (a,b) in memo:
+                return memo[(a,b)]
+            s = min(heights[a],heights[b]) * abs(b-a)
+            if b-1>a:
+                s = max(s,d(a,b-1))
+            if a+1<b:
+                s = max(s,d(a+1,b))
+            memo[(a,b)] = s
+            return memo[(a,b)]
+        return d(i,j)

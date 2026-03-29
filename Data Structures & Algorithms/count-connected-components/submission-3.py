@@ -1,0 +1,15 @@
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        a=[[x] for x in range(n)]
+        ad=[i for i in range(n)]
+        ct=n
+        for e in edges:
+            x,y=e[0],e[1]
+            tx,ty=ad[x],ad[y]
+            if tx!=ty:
+                islanders = a[ty]
+                n-=1
+                for i in islanders:
+                    ad[i]=tx
+                a[tx]=a[tx]+islanders
+        return n
